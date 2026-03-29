@@ -51,8 +51,9 @@
     </div>
     <script>
         let theme = "dark"
-        let mode = "static"
-        let svgText = null
+        let mode = "animation"
+        let svgNk = null
+        let svgNu = null
         let timeInterval = null
         let totalDuration = 2002
 
@@ -95,20 +96,26 @@
 
             backgroundElement.style.backgroundColor = backgroundColor
             bodyElement.style.backgroundColor = pathColor
-
             const pathList = Array.from(document.querySelectorAll('path'));
             pathList.forEach((path, index) => {
-                path.style.stroke = pathColor
+                if(mode=="animation"){
+                    path.style.stroke = pathColor
+                }
+                else{
+                    path.style.fill = pathColor
+                }
             })
         }
         async function loadAndAnimateSignature() {
-            if (svgText == null) {
-                const response = await fetch('nk.svg');
-                svgText = await response.text();
+            if (svgNk == null || svgNu == null) {
+                const responseNk = await fetch('nk.svg');
+                const responseNu = await fetch('nu.svg');
+                svgNk = await responseNk.text();
+                svgNu = await responseNu.text();
             }
 
             const container = document.getElementById('signature-container');
-            container.innerHTML = svgText;
+            container.innerHTML = mode == "animation" ? svgNk : svgNu;
             await setTheme()
             if (mode == 'animation') {
                 const layers = Array.from(document.querySelectorAll('g'))
