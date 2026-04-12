@@ -25,9 +25,9 @@
      inkscape:document-units="px"
      inkscape:clip-to-page="true"
      showgrid="true"
-     inkscape:zoom="64"
-     inkscape:cx="270.22656"
-     inkscape:cy="856.57031"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="258.6243"
+     inkscape:cy="876.37047"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -273,9 +273,11 @@
        d="M 246,906 V 810"
        id="name-3" />
     <path
-       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1"
-       d="m 318,876 a 30,30 0 0 1 -30,30 m 0,0 A 18,18 0 0 1 275.27208,900.7279 18,18 0 0 1 270,888 m 0,0 v -30"
-       id="name-4" />
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0"
+       transform="scale(-1,1)"
+       d="m -270,858 v 30 c 0,9.94113 -8.05887,18 -18,18 -7.95649,0 -15.58711,-3.16071 -21.2132,-8.7868 C -314.83929,891.58711 -318,883.95649 -318,876"
+       sodipodi:nodetypes="cccsc"
+       id="name-4"/>
     <path
        style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-opacity:1"
        d="m 318,858 v 48"

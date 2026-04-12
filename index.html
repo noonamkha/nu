@@ -7,6 +7,11 @@
     <title>Nu</title>
     <link rel="icon" href="nerd_face_color.svg" type="image/svg+xml">
     <style>
+        :root {
+            /* Define a CSS variable for the size, defaulting to the original 84vmin */
+            --container-size: 84vmin;
+        }
+
         body {
             margin: 0;
             display: flex;
@@ -18,24 +23,33 @@
         }
 
         svg {
-            width: 84vmin;
-            height: 84vmin;
+            /* Use the variable so dynamically injected SVGs automatically inherit the size */
+            width: var(--container-size);
+            height: var(--container-size);
         }
 
         button,
-        input {
+        input[type="number"] {
             width: 84px;
         }
 
+        input[type="range"] {
+            width: 120px;
+            /* Slightly wider for better slider usability */
+            cursor: pointer;
+        }
+
         #signature-container {
-            width: 84vmin;
-            height: 84vmin;
-            border-radius: 4vmin;
+            width: var(--container-size);
+            height: var(--container-size);
+            /* Scales the original 4vmin border-radius relative to the 84vmin default size */
+            border-radius: calc(var(--container-size) / 21);
         }
 
         #input-container {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 12px;
         }
     </style>
@@ -49,6 +63,7 @@
         <button id="modeButton">static</button>
         <input id="durationInput" type="number" min="0" step="100">
     </div>
+    <input id="sizeSlider" type="range" min="12" max="84" value="84" title="Adjust Size">
     <script>
         let theme = "dark"
         let mode = "animation"
@@ -60,6 +75,13 @@
         const themeButton = document.getElementById('themeButton');
         const modeButton = document.getElementById('modeButton');
         const inputElement = document.getElementById('durationInput');
+        const sizeSlider = document.getElementById('sizeSlider');
+
+        // Event listener for the size slider
+        sizeSlider.addEventListener('input', (event) => {
+            // Update the CSS variable, which instantly resizes the container, SVG, and border-radius
+            document.documentElement.style.setProperty('--container-size', `${event.target.value}vmin`);
+        });
 
         inputElement.addEventListener('input', (event) => {
             inputDuration = event.target.valueAsNumber;
@@ -98,10 +120,10 @@
             bodyElement.style.backgroundColor = pathColor
             const pathList = Array.from(document.querySelectorAll('path'));
             pathList.forEach((path, index) => {
-                if(mode=="animation"){
+                if (mode == "animation") {
                     path.style.stroke = pathColor
                 }
-                else{
+                else {
                     path.style.fill = pathColor
                 }
             })
@@ -134,9 +156,9 @@
                         signature_a = animatePath(blockList.slice(4, -1))
                     }
                     else {
-                        name1 = animatePath(blockList.slice(0, 6))
-                        name2 = animatePath(blockList.slice(6, 14))
-                        name3 = animatePath(blockList.slice(14))
+                        name1 = animatePath(blockList.slice(0, 5))
+                        name2 = animatePath(blockList.slice(5, 13))
+                        name3 = animatePath(blockList.slice(13))
                     }
                 })
             }
