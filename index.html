@@ -8,8 +8,8 @@
     <link rel="icon" href="nerd_face_color.svg" type="image/svg+xml">
     <style>
         :root {
-            /* Define a CSS variable for the size, defaulting to the original 84vmin */
-            --container-size: 84vmin;
+            /* Single source of truth for the initial and maximum size */
+            --container-size: 80vmin;
         }
 
         body {
@@ -63,7 +63,7 @@
         <button id="modeButton">static</button>
         <input id="durationInput" type="number" min="0" step="100">
     </div>
-    <input id="sizeSlider" type="range" min="12" max="84" value="84" title="Adjust Size">
+    <input id="sizeSlider" type="range" min="12" title="Adjust Size">
     <script>
         let theme = "dark"
         let mode = "animation"
@@ -81,6 +81,12 @@
             sizeSlider.value = value;
             document.documentElement.style.setProperty('--container-size', `${sizeSlider.value}vmin`);
         }
+
+        const initialSize = parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--container-size')
+        );
+        sizeSlider.max = initialSize;
+        updateSize(initialSize);
 
         sizeSlider.addEventListener('input', (event) => {
             updateSize(event.target.value);
