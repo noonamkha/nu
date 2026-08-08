@@ -77,11 +77,28 @@
         const inputElement = document.getElementById('durationInput');
         const sizeSlider = document.getElementById('sizeSlider');
 
-        // Event listener for the size slider
+        function updateSize(value) {
+            sizeSlider.value = value;
+            document.documentElement.style.setProperty('--container-size', `${sizeSlider.value}vmin`);
+        }
+
         sizeSlider.addEventListener('input', (event) => {
-            // Update the CSS variable, which instantly resizes the container, SVG, and border-radius
-            document.documentElement.style.setProperty('--container-size', `${event.target.value}vmin`);
+            updateSize(event.target.value);
         });
+
+        document.addEventListener('wheel', (event) => {
+            if (!event.ctrlKey) return;
+
+            event.preventDefault();
+
+            const min = Number(sizeSlider.min);
+            const max = Number(sizeSlider.max);
+            const step = Number(sizeSlider.step) || 4;
+            const direction = event.deltaY < 0 ? 1 : -1;
+            const nextSize = Math.min(max, Math.max(min, sizeSlider.valueAsNumber + direction * step));
+
+            updateSize(nextSize);
+        }, { passive: false });
 
         inputElement.addEventListener('input', (event) => {
             inputDuration = event.target.valueAsNumber;
