@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nu</title>
-    <link rel="icon" href="nerd_face_color.svg" type="image/svg+xml">
+    <link rel="icon" href="assets/nerd.svg" type="image/svg+xml">
     <style>
         @font-face {
             font-family: "Quicksand";
@@ -90,8 +90,8 @@
     <script>
         let theme = "dark"
         let mode = "animated"
-        let svgNk = null
-        let svgNu = null
+        let svgNuAnim = null
+        let svgNuStat = null
         let timeInterval = null
         let totalDuration = 2002
 
@@ -183,14 +183,14 @@
             });
         }
         async function loadAndAnimateSignature() {
-            if (svgNk == null || svgNu == null) {
-                const responseNk = await fetch('nu-ani.svg');
-                const responseNu = await fetch('nu.svg');
-                svgNk = await responseNk.text();
-                svgNu = await responseNu.text();
+            if (svgNuAnim == null || svgNuStat == null) {
+                const responseNuAnim = await fetch('assets/nu-anim.svg');
+                const responseNuStat = await fetch('assets/nu-stat.svg');
+                svgNuAnim = await responseNuAnim.text();
+                svgNuStat = await responseNuStat.text();
             }
             const container = document.getElementById('signature-container');
-            container.innerHTML = mode == "animated" ? svgNk : svgNu;
+            container.innerHTML = mode == "animated" ? svgNuAnim : svgNuStat;
             await setTheme()
             if (mode == 'animated') {
                 const layers = Array.from(document.querySelectorAll('g'))
