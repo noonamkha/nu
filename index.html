@@ -97,7 +97,7 @@
 
         const themeButton = document.getElementById('themeButton');
         const modeButton = document.getElementById('modeButton');
-        const inputElement = document.getElementById('durationInput');
+        const durationInput = document.getElementById('durationInput');
         const sizeSlider = document.getElementById('sizeSlider');
 
         function updateSize(value) {
@@ -129,7 +129,7 @@
             updateSize(nextSize);
         }, { passive: false });
 
-        inputElement.addEventListener('input', (event) => {
+        durationInput.addEventListener('input', (event) => {
             inputDuration = event.target.valueAsNumber;
             if (isNaN(inputDuration)) {
                 totalDuration = 0;
@@ -189,7 +189,6 @@
                 svgNk = await responseNk.text();
                 svgNu = await responseNu.text();
             }
-
             const container = document.getElementById('signature-container');
             container.innerHTML = mode == "animated" ? svgNk : svgNu;
             await setTheme()
@@ -248,7 +247,7 @@
         }
         themeButton.click()
         modeButton.click()
-        inputElement.value = totalDuration
+        durationInput.value = totalDuration
     </script>
 </body>
 
