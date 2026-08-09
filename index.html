@@ -93,7 +93,7 @@
         let svgNuAnim = null
         let svgNuStat = null
         let timeInterval = null
-        let totalDuration = 2002
+        let totalDuration = 2468
 
         const themeButton = document.getElementById('themeButton');
         const modeButton = document.getElementById('modeButton');
@@ -202,11 +202,19 @@
                         tetris3 = animatePath(blockList.slice(-10), delayLength = 72)
                     }
                     else if (index == 1) {
-                        signature_line = animatePath(blockList.slice(-1))
-                        signature_n = animatePath(blockList.slice(0, 2))
-                        signature_k = animatePath(blockList.slice(2, 3))
-                        signature_h = animatePath(blockList.slice(3, 4))
-                        signature_a = animatePath(blockList.slice(4, -1))
+                        // Single stroke
+                        signature = animatePath(blockList)
+                        // -------------------------------------------------------
+                        // Line and Sign
+                        // signature_line = animatePath(blockList.slice(-1))
+                        // signature_n = animatePath(blockList.slice(0, -1))
+                        // -------------------------------------------------------
+                        // Multiple strokes
+                        // signature_line = animatePath(blockList.slice(-1))
+                        // signature_n = animatePath(blockList.slice(0, 2))
+                        // signature_k = animatePath(blockList.slice(2, 3))
+                        // signature_h = animatePath(blockList.slice(3, 4))
+                        // signature_a = animatePath(blockList.slice(4, -1))
                     }
                     else {
                         name1 = animatePath(blockList.slice(0, 5))
