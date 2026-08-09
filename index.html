@@ -13,38 +13,40 @@
             font-weight: 300 700;
             font-style: normal;
         }
+
         :root {
-            --container-size: 84vmin;
+            --container-size: 100%;
             --flex-gap: 12px;
         }
 
         body {
             margin: 0;
+            font-family: "Quicksand";
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: var(--flex-gap);
-            height: 100vh;
-            font-family: "Quicksand";
         }
 
         svg {
-            width: var(--container-size);
-            height: var(--container-size);
+            /* width: var(--container-size);
+            height: var(--container-size); */
+            width: 100%;
+            height: 100%;
         }
 
         button,
         input {
-            flex:1;
+            flex: 1;
             min-width: 0px;
             box-sizing: border-box;
             text-align: center;
             border-radius: 8px;
-            padding:1px;
+            padding: 1px;
             border: 1px solid;
             font: inherit;
-            height:32px;
+            height: 32px;
+            font-size: small;
         }
 
         input[type="number"]::-webkit-inner-spin-button,
@@ -53,10 +55,20 @@
             margin: 0;
         }
 
+        #wrapper-container {
+            width: 80vmin;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: var(--flex-gap)
+        }
+
         #signature-container {
             width: var(--container-size);
-            height: var(--container-size);
-            border-radius: calc(var(--container-size) *0.05);
+            aspect-ratio: 1;
+            border-radius: 5%;
         }
 
         #input-container {
@@ -65,27 +77,28 @@
             align-items: center;
             gap: var(--flex-gap);
             max-width: var(--container-size);
-            min-width: 48vmin;
+            min-width: 50%;
         }
+
         @media (max-width: 600px) {
             #input-container {
                 min-width: var(--container-size);
-            }
-            input, button {
-                font-size: small;
             }
         }
     </style>
 </head>
 
 <body>
-    <div id="signature-container">
-    </div>
-    <div id="input-container">
-        <button id="themeButton">light</button>
-        <button id="modeButton">static</button>
-        <input id="durationInput" type="number" min="0" step="100">
-        <input id="sizeSlider" type="number" min="12" step="4" title="Adjust Size">
+
+    <div id="wrapper-container">
+        <div id="signature-container">
+        </div>
+        <div id="input-container">
+            <button id="themeButton">light</button>
+            <button id="modeButton">static</button>
+            <input id="durationInput" type="number" min="0" step="100">
+            <input id="sizeSlider" type="number" min="10" step="10" title="Adjust Size">
+        </div>
     </div>
     <script>
         let theme = "dark"
@@ -93,7 +106,7 @@
         let svgNuAnim = null
         let svgNuStat = null
         let timeInterval = null
-        let totalDuration = 3000
+        let totalDuration = 2500
 
         const themeButton = document.getElementById('themeButton');
         const modeButton = document.getElementById('modeButton');
@@ -102,7 +115,7 @@
 
         function updateSize(value) {
             sizeSlider.value = value;
-            document.documentElement.style.setProperty('--container-size', `${sizeSlider.value}vmin`);
+            document.documentElement.style.setProperty('--container-size', `${sizeSlider.value}%`);
         }
 
         const initialSize = parseFloat(
@@ -148,7 +161,7 @@
         function resetInterval() {
             clearInterval(timeInterval)
             loadAndAnimateSignature()
-            timeInterval = setInterval(loadAndAnimateSignature, totalDuration + 1000);
+            timeInterval = setInterval(loadAndAnimateSignature, totalDuration + 1500);
         }
         modeButton.addEventListener('click', function () {
             mode = mode == 'animated' ? 'static' : 'animated'
@@ -176,9 +189,9 @@
             // inputs
             const inputs = document.querySelectorAll("#input-container > *");
             inputs.forEach(inputElement => {
-                inputElement.style.backgroundColor=pathColor
-                inputElement.style.color=backgroundColor
-                inputElement.style.borderColor=backgroundColor
+                inputElement.style.backgroundColor = pathColor
+                inputElement.style.color = backgroundColor
+                inputElement.style.borderColor = backgroundColor
 
             });
         }
