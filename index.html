@@ -9,7 +9,7 @@
     <style>
         :root {
             /* Single source of truth for the initial and maximum size */
-            --container-size: 80vmin;
+            --container-size: 84vmin;
         }
 
         body {
@@ -29,21 +29,18 @@
         }
 
         button,
-        input[type="number"] {
+        input {
             width: 84px;
-        }
-
-        input[type="range"] {
-            width: 120px;
-            /* Slightly wider for better slider usability */
-            cursor: pointer;
+            box-sizing: border-box;
+            text-align: center;
+            border-radius: 8px;
         }
 
         #signature-container {
             width: var(--container-size);
             height: var(--container-size);
             /* Scales the original 4vmin border-radius relative to the 84vmin default size */
-            border-radius: calc(var(--container-size) / 21);
+            border-radius: calc(var(--container-size) *0.05);
         }
 
         #input-container {
@@ -62,8 +59,8 @@
         <button id="themeButton">light</button>
         <button id="modeButton">static</button>
         <input id="durationInput" type="number" min="0" step="100">
+        <input id="sizeSlider" type="number" min="12" step="4" title="Adjust Size">
     </div>
-    <input id="sizeSlider" type="range" min="12" title="Adjust Size">
     <script>
         let theme = "dark"
         let mode = "animation"
