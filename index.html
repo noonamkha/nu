@@ -106,7 +106,7 @@
         let svgNuAnim = null
         let svgNuStat = null
         let timeInterval = null
-        let totalDuration = 2500
+        let totalDuration = 3000
 
         const themeButton = document.getElementById('themeButton');
         const modeButton = document.getElementById('modeButton');
@@ -161,7 +161,7 @@
         function resetInterval() {
             clearInterval(timeInterval)
             loadAndAnimateSignature()
-            timeInterval = setInterval(loadAndAnimateSignature, totalDuration + 1500);
+            timeInterval = setInterval(loadAndAnimateSignature, totalDuration + 1000);
         }
         modeButton.addEventListener('click', function () {
             mode = mode == 'animated' ? 'static' : 'animated'
